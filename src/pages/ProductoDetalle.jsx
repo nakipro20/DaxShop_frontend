@@ -54,6 +54,9 @@ export default function ProductoDetalle() {
     obtenerDetalles();
   }, [id]);
 
+    console.log(producto)
+
+
   const copiarReferencia = () => {
     if (!producto) return;
 

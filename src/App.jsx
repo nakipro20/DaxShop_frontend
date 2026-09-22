@@ -12,6 +12,8 @@ import RutaProtegida from './components/RutaProtegida';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProductos from './pages/admin/AdminProductos';
 import AdminPortafolio from './pages/admin/AdminPortafolio';
+import AdminComisiones from './pages/admin/AdminComisiones';
+
 
 function App() {
   return (
@@ -44,6 +46,11 @@ function App() {
             <Route path="/admin/portafolio" element={
               <RutaProtegida>
                 <AdminPortafolio />
+              </RutaProtegida>
+            } />
+            <Route path="/admin/comisiones" element={
+              <RutaProtegida>
+                <AdminComisiones />
               </RutaProtegida>
             } />
           </Routes>

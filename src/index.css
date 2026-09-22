@@ -61,7 +61,7 @@
 
 /* Configuramos el fondo y tipografía global directamente con CSS puro para mayor estabilidad */
 body {
-  margin: 10px;
+  /* margin: 10px; */
   background-color: var(--color-surface);
   color: var(--color-on-surface);
   font-family: var(--font-body-md);

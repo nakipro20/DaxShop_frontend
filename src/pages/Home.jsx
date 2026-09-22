@@ -1,6 +1,170 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+
+const API_URL = "http://localhost:3000";
+
 
 export default function Home() {
+
+  const [productos, setProductos] = useState([]);
+  const [portafolio, setPortafolio] = useState([]);
+  const [comisiones, setComisiones] = useState([]);
+
+  const [loadingProductos, setLoadingProductos] = useState(true);
+  const [loadingPortafolio, setLoadingPortafolio] = useState(true);
+  const [loadingComisiones, setLoadingComisiones] = useState(true);
+
+  const [errorProductos, setErrorProductos] = useState("");
+  const [errorPortafolio, setErrorPortafolio] = useState("");
+  const [errorComisiones, setErrorComisiones] = useState("");
+
+  // ==========================================================
+  // CONSUMIR PRODUCTOS
+  // ==========================================================
+
+  useEffect(() => {
+    const obtenerProductos = async () => {
+      try {
+        setLoadingProductos(true);
+
+        const respuesta = await fetch(`${API_URL}/productos`);
+
+        if (!respuesta.ok) {
+          throw new Error("No se pudieron obtener los productos");
+        }
+
+        const resultado = await respuesta.json();
+
+        if (resultado.exito) {
+          setProductos(resultado.datos || []);
+        } else {
+          throw new Error("La API no devolvió los productos correctamente");
+        }
+      } catch (error) {
+        console.error("Error productos:", error);
+        setErrorProductos(error.message);
+      } finally {
+        setLoadingProductos(false);
+      }
+    };
+
+    obtenerProductos();
+  }, []);
+
+  // ==========================================================
+  // CONSUMIR PORTAFOLIO
+  // ==========================================================
+
+  useEffect(() => {
+    const obtenerPortafolio = async () => {
+      try {
+        setLoadingPortafolio(true);
+
+        const respuesta = await fetch(`${API_URL}/portafolio`);
+
+        if (!respuesta.ok) {
+          throw new Error("No se pudo obtener el portafolio");
+        }
+
+        const resultado = await respuesta.json();
+
+        if (resultado.exito) {
+          setPortafolio(resultado.datos || []);
+        } else {
+          throw new Error("La API no devolvió el portafolio correctamente");
+        }
+      } catch (error) {
+        console.error("Error portafolio:", error);
+        setErrorPortafolio(error.message);
+      } finally {
+        setLoadingPortafolio(false);
+      }
+    };
+
+    obtenerPortafolio();
+  }, []);
+
+  // ==========================================================
+  // CONSUMIR COMISIONES
+  // ==========================================================
+
+  useEffect(() => {
+    const obtenerComisiones = async () => {
+      try {
+        setLoadingComisiones(true);
+
+        const respuesta = await fetch(`${API_URL}/comisiones`);
+
+        if (!respuesta.ok) {
+          throw new Error("No se pudieron obtener las comisiones");
+        }
+
+        const resultado = await respuesta.json();
+
+        if (resultado.exito) {
+          setComisiones(resultado.datos || []);
+        } else {
+          throw new Error("La API no devolvió las comisiones correctamente");
+        }
+      } catch (error) {
+        console.error("Error comisiones:", error);
+        setErrorComisiones(error.message);
+      } finally {
+        setLoadingComisiones(false);
+      }
+    };
+
+    obtenerComisiones();
+  }, []);
+
+  // ==========================================================
+  // PRODUCTOS DESTACADOS
+  // ==========================================================
+
+  const productosDestacados = productos.slice(0, 6);
+
+  // ==========================================================
+  // PORTAFOLIO DESTACADO
+  // ==========================================================
+
+  const portafolioDestacado = portafolio.slice(0, 3);
+
+  // ==========================================================
+  // COMISIONES DESTACADAS
+  // ==========================================================
+
+  const comisionesDestacadas = comisiones.slice(0, 4);
+
+  // ==========================================================
+  // FORMATEAR FECHA
+  // ==========================================================
+
+  const formatearFecha = (fecha) => {
+    if (!fecha) return "";
+
+    try {
+      return new Date(fecha).toLocaleDateString("es-GT", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    } catch {
+      return fecha;
+    }
+  };
+
+  // ==========================================================
+  // ESTADO DE STOCK
+  // ==========================================================
+
+  const obtenerClaseStock = (estado) => {
+    if (estado === "Disponible") {
+      return "bg-primary-container text-on-primary-container";
+    }
+
+    return "bg-surface-container-high text-on-surface";
+  };
+
   return (
     <div className="flex flex-col w-full">
       
@@ -25,7 +189,7 @@ export default function Home() {
           
           <div className="flex flex-wrap items-center justify-between gap-space-sm mb-space-md relative z-10">
             <div className="inline-flex items-center gap-space-xs bg-primary-container text-on-primary-container px-space-sm py-1 border-2 border-on-surface rounded-md shadow-[3px_3px_0_#1a1c1a] transform -rotate-1">
-              <span className="material-symbols-outlined text-sm">palette</span>
+              <span className="material-symbols-outlined text-sm"></span>
               <span className="font-label-md text-label-md uppercase tracking-wider">TIENDA OFICIAL & PORTAFOLIO</span>
             </div>
             <div className="inline-flex items-center gap-space-xs bg-surface-container-high text-on-surface px-space-sm py-1 border-2 border-on-surface rounded shadow-[2px_2px_0_#1a1c1a]">
@@ -97,6 +261,436 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* =====================================================
+          PRODUCTOS
+      ====================================================== */}
+
+      <section className="w-full max-w-7xl mx-auto px-gutter py-space-lg">
+
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b-[3px] border-on-surface pb-space-sm mb-space-md">
+
+          <div>
+
+            <span className="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">
+              CATÁLOGO
+            </span>
+
+            <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight">
+              PRODUCTOS DESTACADOS
+            </h2>
+          </div>
+
+          <Link
+            to="/catalogo"
+            className="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:text-on-surface transition-colors"
+          >
+            VER CATÁLOGO COMPLETO
+
+            <span className="material-symbols-outlined text-base">
+              arrow_forward
+            </span>
+          </Link>
+        </div>
+
+        {loadingProductos ? (
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <div
+                key={item}
+                className="h-96 rounded-xl bg-surface-container-low animate-pulse border-[3px] border-on-surface"
+              />
+            ))}
+
+          </div>
+
+        ) : errorProductos ? (
+
+          <div className="p-space-md bg-primary-fixed border-2 border-on-surface rounded-xl">
+            <p className="font-body-md text-body-md">
+              No fue posible cargar los productos.
+            </p>
+          </div>
+
+        ) : productosDestacados.length === 0 ? (
+
+          <div className="p-space-lg text-center bg-surface-container-low rounded-xl border-[3px] border-on-surface">
+            <span className="material-symbols-outlined text-4xl">
+              inventory_2
+            </span>
+
+            <p className="font-body-md text-body-md mt-space-xs">
+              No hay productos disponibles.
+            </p>
+          </div>
+
+        ) : (
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+
+            {productosDestacados.map((producto) => (
+
+              <article
+                key={producto.id}
+                className="bg-surface-container-lowest border-[2.5px] border-on-surface rounded-xl shadow-[5px_5px_0_#1a1c1a] p-space-md flex flex-col justify-between hover:-translate-y-1 transition-all"
+              >
+
+                <div>
+
+                  <div className="flex justify-between items-start gap-space-sm mb-space-sm">
+
+                    <span className="px-space-xs py-0.5 font-label-sm text-label-sm border border-on-surface rounded bg-secondary-container text-on-secondary-container">
+                      {producto.category_name || "PRODUCTO"}
+                    </span>
+
+                    <span
+                      className={`px-space-xs py-0.5 font-label-sm text-label-sm border border-on-surface rounded ${obtenerClaseStock(
+                        producto.stock_status
+                      )}`}
+                    >
+                      {producto.stock_status}
+                    </span>
+                  </div>
+
+                  <div className="w-full h-52 bg-surface-container-low border-2 border-on-surface rounded-lg overflow-hidden mb-space-sm">
+
+                    {producto.primary_image_url ? (
+                      <img
+                        src={producto.primary_image_url}
+                        alt={producto.title}
+                        className="w-full h-full object-cover hover:scale-[1.03] transition-transform"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="material-symbols-outlined text-5xl">
+                          image
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface uppercase">
+                    {producto.title}
+                  </h3>
+
+                  <p className="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3">
+                    {producto.description}
+                  </p>
+
+                </div>
+
+                <div className="mt-space-md pt-space-sm border-t border-surface-container-highest">
+
+                  <div className="flex items-center justify-between gap-space-sm">
+
+                    <div className="flex flex-col">
+
+                      <span className="font-headline-sm text-headline-sm text-primary">
+                        Q{producto.price_quetzales}
+                      </span>
+
+                      <span className="font-label-sm text-label-sm text-on-surface-variant">
+                        ${producto.price_usd}
+                      </span>
+
+                    </div>
+
+                    <Link
+                      to={`/catalogo/${producto.id}`}
+                      className="inline-flex items-center gap-0.5 font-label-md text-label-md text-primary hover:underline"
+                    >
+                      Ver producto
+
+                      <span className="material-symbols-outlined text-sm">
+                        chevron_right
+                      </span>
+                    </Link>
+
+                  </div>
+                </div>
+
+              </article>
+            ))}
+
+          </div>
+        )}
+      </section>
+
+      {/* =====================================================
+          PORTAFOLIO
+      ====================================================== */}
+
+      <section className="w-full bg-surface-container-low border-y-[3px] border-on-surface py-space-xl">
+
+        <div className="max-w-7xl mx-auto px-gutter">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b-[3px] border-on-surface pb-space-sm mb-space-md">
+
+            <div>
+
+              <span className="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">
+                GALERÍA
+              </span>
+
+              <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase">
+                PORTAFOLIO
+              </h2>
+
+            </div>
+
+            <Link
+              to="/portafolio"
+              className="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary"
+            >
+              VER GALERÍA COMPLETA
+
+              <span className="material-symbols-outlined">
+                arrow_forward
+              </span>
+            </Link>
+
+          </div>
+
+          {loadingPortafolio ? (
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="h-96 bg-surface-container-high animate-pulse rounded-xl border-[3px] border-on-surface"
+                />
+              ))}
+
+            </div>
+
+          ) : errorPortafolio ? (
+
+            <div className="p-space-md bg-primary-fixed border-2 border-on-surface rounded-xl">
+              <p className="font-body-md text-body-md">
+                No fue posible cargar el portafolio.
+              </p>
+            </div>
+
+          ) : portafolioDestacado.length === 0 ? (
+
+            <div className="text-center p-space-lg">
+              <p className="font-body-md text-body-md">
+                No hay trabajos disponibles.
+              </p>
+            </div>
+
+          ) : (
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+
+              {portafolioDestacado.map((obra) => (
+
+                <article
+                  key={obra.id}
+                  className="bg-surface-container-lowest border-[3px] border-on-surface rounded-xl overflow-hidden shadow-[5px_5px_0_#1a1c1a]"
+                >
+
+                  <div className="h-64 bg-surface-container-highest border-b-[3px] border-on-surface">
+
+                    {obra.primary_image_url ? (
+                      <img
+                        src={obra.primary_image_url}
+                        alt={obra.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="material-symbols-outlined text-5xl">
+                          image
+                        </span>
+                      </div>
+                    )}
+
+                  </div>
+
+                  <div className="p-space-md">
+
+                    <div className="flex justify-between gap-space-sm mb-space-xs">
+
+                      <span className="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-space-xs py-0.5 rounded border border-on-surface">
+                        {obra.category_name || "PORTAFOLIO"}
+                      </span>
+
+                      <span className="font-label-sm text-label-sm text-on-surface-variant">
+                        {obra.project_type}
+                      </span>
+
+                    </div>
+
+                    <h3 className="font-headline-sm text-headline-sm uppercase">
+                      {obra.title}
+                    </h3>
+
+                    <p className="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3">
+                      {obra.description}
+                    </p>
+
+                    <div className="mt-space-sm pt-space-xs border-t border-surface-container-highest">
+
+                      <div className="flex justify-between gap-space-sm">
+
+                        <span className="font-label-sm text-label-sm">
+                          {obra.technique}
+                        </span>
+
+                        <span className="font-label-sm text-label-sm text-on-surface-variant">
+                          {formatearFecha(obra.completion_date)}
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </article>
+              ))}
+
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* =====================================================
+          COMISIONES
+      ====================================================== */}
+
+      <section className="w-full max-w-7xl mx-auto px-gutter py-space-xl">
+
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b-[3px] border-on-surface pb-space-sm mb-space-md">
+
+          <div>
+
+            <span className="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">
+              SERVICIOS
+            </span>
+
+            <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase">
+              COMISIONES
+            </h2>
+
+          </div>
+
+          <Link
+            to="/comisiones"
+            className="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary"
+          >
+            VER TODAS LAS COMISIONES
+
+            <span className="material-symbols-outlined">
+              arrow_forward
+            </span>
+          </Link>
+
+        </div>
+
+        {loadingComisiones ? (
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+
+            {[1, 2, 3, 4].map((item) => (
+              <div
+                key={item}
+                className="h-96 bg-surface-container-high animate-pulse rounded-xl border-[3px] border-on-surface"
+              />
+            ))}
+
+          </div>
+
+        ) : errorComisiones ? (
+
+          <div className="p-space-md bg-primary-fixed border-2 border-on-surface rounded-xl">
+            <p className="font-body-md text-body-md">
+              No fue posible cargar las comisiones.
+            </p>
+          </div>
+
+        ) : comisionesDestacadas.length === 0 ? (
+
+          <div className="text-center p-space-lg">
+            <p className="font-body-md text-body-md">
+              No hay servicios de comisión disponibles.
+            </p>
+          </div>
+
+        ) : (
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+
+            {comisionesDestacadas.map((comision) => (
+
+              <article
+                key={comision.id}
+                className="bg-surface-container-lowest border-[3px] border-on-surface rounded-xl overflow-hidden shadow-[5px_5px_0_#1a1c1a] flex flex-col"
+              >
+
+                <div className="h-48 bg-surface-container-highest border-b-[3px] border-on-surface">
+
+                  {comision.cover_image_url ? (
+                    <img
+                      src={comision.cover_image_url}
+                      alt={comision.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="material-symbols-outlined text-5xl">
+                        palette
+                      </span>
+                    </div>
+                  )}
+
+                </div>
+
+                <div className="p-space-md flex flex-col flex-1">
+
+                  <h3 className="font-headline-sm text-headline-sm uppercase">
+                    {comision.name}
+                  </h3>
+
+                  <p className="font-body-sm text-body-sm text-on-surface-variant mt-space-xs line-clamp-4">
+                    {comision.description}
+                  </p>
+
+                  <div className="mt-auto pt-space-md">
+
+                    <div className="flex items-end justify-between gap-space-sm">
+
+                      <div>
+
+                        <span className="font-headline-sm text-headline-sm text-primary block">
+                          Q{comision.base_price_quetzales}
+                        </span>
+
+                        <span className="font-label-sm text-label-sm text-on-surface-variant">
+                          ${comision.base_price_usd}
+                        </span>
+
+                      </div>
+
+                      <span className="font-label-sm text-label-sm text-right">
+                        {comision.estimated_time}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </article>
+            ))}
+
+          </div>
+        )}
+      </section>
 
         {/* BANNER DE AVISO DIRECTO: CÓMO SE COMPRA */}
         <div className="w-full bg-primary-fixed border-[3px] border-on-surface rounded-xl shadow-[5px_5px_0_#1a1c1a] p-space-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
