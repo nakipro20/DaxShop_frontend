@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // Esta es la ruta base de tu backend local
-  baseURL: 'http://localhost:3000/', 
+  // Vite usa import.meta.env para leer variables de entorno
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
 });
 
 export default api;

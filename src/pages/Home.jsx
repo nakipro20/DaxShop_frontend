@@ -169,7 +169,10 @@ export default function Home() {
     <div className="flex flex-col w-full">
       
       {/* TIRA DE ANUNCIOS SUPERIOR (COMIC TICKER) */}
-      <div className="w-full bg-secondary-container text-on-secondary-container py-space-xs px-gutter border-b-[3px] border-on-surface flex items-center justify-between overflow-hidden">
+      {/* overflow-x-auto (en vez de overflow-hidden) + no-scrollbar: en mobile
+          el texto no cabe y antes se recortaba silenciosamente; ahora se
+          puede deslizar horizontalmente sin mostrar la barra de scroll. */}
+      <div className="w-full bg-secondary-container text-on-secondary-container py-space-xs px-gutter-mobile sm:px-gutter border-b-[3px] border-on-surface flex items-center justify-between overflow-x-auto no-scrollbar">
         <div className="flex items-center gap-space-md whitespace-nowrap animate-pulse">
           <span className="font-label-sm text-label-sm uppercase flex items-center gap-space-xs">
             <span className="material-symbols-outlined text-sm"></span> DROPS LIMITADOS 2026
@@ -181,8 +184,12 @@ export default function Home() {
       </div>
 
       {/* HERO SECTION CON ESTÉTICA VIÑETA COMIC */}
-      <section className="relative w-full max-w-7xl mx-auto px-gutter py-space-xl lg:py-space-xl flex flex-col gap-space-lg">
-        <div className="relative bg-surface-container-lowest border-[3px] border-on-surface rounded-xl shadow-[8px_8px_0_#1a1c1a] p-space-md sm:p-space-lg lg:p-space-xl overflow-hidden">
+      {/* px-gutter-mobile / sm:px-gutter: tu theme ya define un gutter más
+          angosto para mobile (spacing-gutter-mobile) que nunca se estaba
+          usando; py-space-lg en vez de py-space-xl reduce el aire vertical
+          desperdiciado en pantallas cortas, y vuelve a py-space-xl desde lg. */}
+      <section className="relative w-full max-w-7xl mx-auto px-gutter-mobile sm:px-gutter py-space-lg lg:py-space-xl flex flex-col gap-space-lg">
+        <div className="relative bg-surface-container-lowest border-[3px] border-on-surface rounded-xl shadow-[5px_5px_0_#1a1c1a] sm:shadow-[8px_8px_0_#1a1c1a] p-space-sm sm:p-space-lg lg:p-space-xl overflow-hidden">
           
           {/* Halftone pattern decorativo (simulado con gradiente) */}
           <div className="absolute -right-12 -top-12 w-64 h-64 opacity-10 pointer-events-none" style={{backgroundImage: 'radial-gradient(#1a1c1a 2px, transparent 2px)', backgroundSize: '10px 10px'}}></div>
@@ -205,7 +212,11 @@ export default function Home() {
                 <span className="font-label-lg text-label-lg tracking-wide uppercase">¡100% ARTE AUTÉNTICO & STREET STYLE!</span>
               </div>
               
-              <h1 className="font-display text-display text-on-surface uppercase tracking-tight leading-none">
+              {/* text-display-mobile en vez de text-display fijo: el theme ya
+                  trae este tamaño (40px) pensado justo para esto, solo no se
+                  estaba usando. De sm en adelante vuelve al text-display
+                  original (56px), igual que en desktop. */}
+              <h1 className="font-display text-display-mobile sm:text-display text-on-surface uppercase tracking-tight leading-none">
                 ¡ARTE, MERCH & <span className="text-primary bg-primary-fixed px-space-xs border-2 border-on-surface inline-block shadow-[4px_4px_0_#1a1c1a] -rotate-1">ESTILO</span> URBANO!
               </h1>
               
@@ -222,11 +233,11 @@ export default function Home() {
 
               {/* CTAs Primarios */}
               <div className="flex flex-wrap items-center gap-space-sm pt-space-sm">
-                <Link to="/catalogo" className="inline-flex items-center gap-space-xs bg-primary-container text-on-primary-container font-label-lg text-label-lg px-space-lg py-space-sm rounded-lg border-[3px] border-on-surface shadow-[5px_5px_0_#1a1c1a] hover:bg-primary hover:text-on-primary hover:shadow-[7px_7px_0_#1a1c1a] hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#1a1c1a] transition-all">
+                <Link to="/catalogo" className="w-full sm:w-auto justify-center inline-flex items-center gap-space-xs bg-primary-container text-on-primary-container font-label-lg text-label-lg px-space-lg py-space-sm rounded-lg border-[3px] border-on-surface shadow-[5px_5px_0_#1a1c1a] hover:bg-primary hover:text-on-primary hover:shadow-[7px_7px_0_#1a1c1a] hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_#1a1c1a] transition-all">
                   <span className="material-symbols-outlined">menu_book</span>
                   <span>VER CATÁLOGO & PRECIOS</span>
                 </Link>
-                <a href="https://instagram.com/daxth1" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-space-xs bg-surface-container text-on-surface font-label-lg text-label-lg px-space-md py-space-sm rounded-lg border-[2.5px] border-on-surface shadow-[4px_4px_0_#1a1c1a] hover:bg-secondary-container hover:text-on-secondary-container hover:shadow-[5px_5px_0_#1a1c1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                <a href="https://instagram.com/daxth1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto justify-center inline-flex items-center gap-space-xs bg-surface-container text-on-surface font-label-lg text-label-lg px-space-md py-space-sm rounded-lg border-[2.5px] border-on-surface shadow-[4px_4px_0_#1a1c1a] hover:bg-secondary-container hover:text-on-secondary-container hover:shadow-[5px_5px_0_#1a1c1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
                   <span className="material-symbols-outlined text-primary">chat</span>
                   <span>PEDIR EN IG @DAXTH1</span>
                 </a>
@@ -240,7 +251,7 @@ export default function Home() {
                 <div className="relative bg-surface-container-lowest border-[3px] border-on-surface rounded-xl shadow-[6px_6px_0_#1a1c1a] p-space-sm transform -rotate-1 group-hover:rotate-0 transition-transform">
                   <div className="bg-surface-container-highest border-2 border-on-surface rounded-lg overflow-hidden relative">
                     {/* Reemplaza esta URL con tu imagen principal real si la tienes alojada en otro lado */}
-                    <div className="w-full h-80 bg-gray-200 flex items-center justify-center font-headline-md text-gray-500">
+                    <div className="w-full h-56 sm:h-72 lg:h-80 bg-gray-200 flex items-center justify-center font-headline-md text-gray-500">
                       <img src="src\assets\image.png" alt="LOGO DAX" width="100%"/>
                     </div>
                     <div className="absolute bottom-2 right-2 bg-primary text-on-primary px-space-sm py-0.5 font-label-sm text-label-sm border-2 border-on-surface rounded shadow-[2px_2px_0_#1a1c1a]">
@@ -266,7 +277,7 @@ export default function Home() {
           PRODUCTOS
       ====================================================== */}
 
-      <section className="w-full max-w-7xl mx-auto px-gutter py-space-lg">
+      <section className="w-full max-w-7xl mx-auto px-gutter-mobile sm:px-gutter py-space-lg">
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b-[3px] border-on-surface pb-space-sm mb-space-md">
 
@@ -276,7 +287,10 @@ export default function Home() {
               CATÁLOGO
             </span>
 
-            <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight">
+            {/* text-headline-lg-mobile (28px, ya definido en el theme) en vez
+                del text-headline-lg fijo (40px) que se veía enorme en
+                celulares angostos; desde lg vuelve al tamaño original. */}
+            <h2 className="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface uppercase tracking-tight">
               PRODUCTOS DESTACADOS
             </h2>
           </div>
@@ -288,7 +302,6 @@ export default function Home() {
             VER CATÁLOGO COMPLETO
 
             <span className="material-symbols-outlined text-base">
-              arrow_forward
             </span>
           </Link>
         </div>
@@ -300,7 +313,7 @@ export default function Home() {
             {[1, 2, 3, 4, 5, 6].map((item) => (
               <div
                 key={item}
-                className="h-96 rounded-xl bg-surface-container-low animate-pulse border-[3px] border-on-surface"
+                className="h-80 sm:h-96 rounded-xl bg-surface-container-low animate-pulse border-[3px] border-on-surface"
               />
             ))}
 
@@ -354,7 +367,10 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <div className="w-full h-52 bg-surface-container-low border-2 border-on-surface rounded-lg overflow-hidden mb-space-sm">
+                  {/* h-44 en mobile (antes h-52 fijo) para que la tarjeta no
+                      ocupe tanto scroll vertical en celulares; desde sm vuelve
+                      al alto original. */}
+                  <div className="w-full h-44 sm:h-52 bg-surface-container-low border-2 border-on-surface rounded-lg overflow-hidden mb-space-sm">
 
                     {producto.primary_image_url ? (
                       <img
@@ -404,7 +420,7 @@ export default function Home() {
                       Ver producto
 
                       <span className="material-symbols-outlined text-sm">
-                        chevron_right
+                        
                       </span>
                     </Link>
 
@@ -422,9 +438,9 @@ export default function Home() {
           PORTAFOLIO
       ====================================================== */}
 
-      <section className="w-full bg-surface-container-low border-y-[3px] border-on-surface py-space-xl">
+      <section className="w-full bg-surface-container-low border-y-[3px] border-on-surface py-space-lg lg:py-space-xl">
 
-        <div className="max-w-7xl mx-auto px-gutter">
+        <div className="max-w-7xl mx-auto px-gutter-mobile sm:px-gutter">
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b-[3px] border-on-surface pb-space-sm mb-space-md">
 
@@ -434,7 +450,7 @@ export default function Home() {
                 GALERÍA
               </span>
 
-              <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase">
+              <h2 className="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface uppercase">
                 PORTAFOLIO
               </h2>
 
@@ -447,7 +463,7 @@ export default function Home() {
               VER GALERÍA COMPLETA
 
               <span className="material-symbols-outlined">
-                arrow_forward
+                
               </span>
             </Link>
 
@@ -455,12 +471,12 @@ export default function Home() {
 
           {loadingPortafolio ? (
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-space-md">
 
               {[1, 2, 3].map((item) => (
                 <div
                   key={item}
-                  className="h-96 bg-surface-container-high animate-pulse rounded-xl border-[3px] border-on-surface"
+                  className="h-80 sm:h-96 bg-surface-container-high animate-pulse rounded-xl border-[3px] border-on-surface"
                 />
               ))}
 
@@ -484,7 +500,10 @@ export default function Home() {
 
           ) : (
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+            /* sm:grid-cols-2 agregado para que tablets angostas / celulares
+               grandes en horizontal ya muestren 2 columnas en vez de saltar
+               directo de 1 a 3 en md. */
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-space-md">
 
               {portafolioDestacado.map((obra) => (
 
@@ -493,7 +512,7 @@ export default function Home() {
                   className="bg-surface-container-lowest border-[3px] border-on-surface rounded-xl overflow-hidden shadow-[5px_5px_0_#1a1c1a]"
                 >
 
-                  <div className="h-64 bg-surface-container-highest border-b-[3px] border-on-surface">
+                  <div className="h-56 sm:h-64 bg-surface-container-highest border-b-[3px] border-on-surface">
 
                     {obra.primary_image_url ? (
                       <img
@@ -562,7 +581,7 @@ export default function Home() {
           COMISIONES
       ====================================================== */}
 
-      <section className="w-full max-w-7xl mx-auto px-gutter py-space-xl">
+      <section className="w-full max-w-7xl mx-auto px-gutter-mobile sm:px-gutter py-space-lg lg:py-space-xl">
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b-[3px] border-on-surface pb-space-sm mb-space-md">
 
@@ -572,7 +591,7 @@ export default function Home() {
               SERVICIOS
             </span>
 
-            <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase">
+            <h2 className="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface uppercase">
               COMISIONES
             </h2>
 
@@ -583,10 +602,6 @@ export default function Home() {
             className="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary"
           >
             VER TODAS LAS COMISIONES
-
-            <span className="material-symbols-outlined">
-              arrow_forward
-            </span>
           </Link>
 
         </div>
@@ -598,7 +613,7 @@ export default function Home() {
             {[1, 2, 3, 4].map((item) => (
               <div
                 key={item}
-                className="h-96 bg-surface-container-high animate-pulse rounded-xl border-[3px] border-on-surface"
+                className="h-80 sm:h-96 bg-surface-container-high animate-pulse rounded-xl border-[3px] border-on-surface"
               />
             ))}
 
@@ -622,7 +637,9 @@ export default function Home() {
 
         ) : (
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+          /* md:grid-cols-3 agregado como paso intermedio para tablets antes
+             de saltar a 4 columnas en pantallas grandes (lg). */
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-space-md">
 
             {comisionesDestacadas.map((comision) => (
 
@@ -631,7 +648,7 @@ export default function Home() {
                 className="bg-surface-container-lowest border-[3px] border-on-surface rounded-xl overflow-hidden shadow-[5px_5px_0_#1a1c1a] flex flex-col"
               >
 
-                <div className="h-48 bg-surface-container-highest border-b-[3px] border-on-surface">
+                <div className="h-40 sm:h-48 bg-surface-container-highest border-b-[3px] border-on-surface">
 
                   {comision.cover_image_url ? (
                     <img
@@ -711,13 +728,13 @@ export default function Home() {
       </section>
 
       {/* SECCIÓN: CÓMO COMPRAR EN DAXSHOP (3 PASOS COMIC STRIP) */}
-      <section className="w-full bg-surface-container-low border-t-[3px] border-on-surface py-space-xl">
-        <div className="max-w-7xl mx-auto px-gutter flex flex-col gap-space-lg">
+      <section className="w-full bg-surface-container-low border-t-[3px] border-on-surface py-space-lg lg:py-space-xl">
+        <div className="max-w-7xl mx-auto px-gutter-mobile sm:px-gutter flex flex-col gap-space-lg">
           <div className="text-center max-w-2xl mx-auto flex flex-col items-center gap-space-xs">
             <div className="inline-flex items-center gap-space-xs bg-primary-container text-on-primary-container px-space-sm py-0.5 rounded border border-on-surface font-label-sm text-label-sm uppercase">
               GUÍA RÁPIDA EN 3 PASOS
             </div>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface uppercase">
+            <h2 className="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-surface uppercase">
               ¿CÓMO COMPRAR EN DAXSHOP?
             </h2>
           </div>

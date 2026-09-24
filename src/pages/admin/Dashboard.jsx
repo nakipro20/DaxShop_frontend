@@ -29,18 +29,18 @@ export default function Dashboard() {
     <div className="font-['Rubik',sans-serif]" style={{ color: C.onSurface }}>
       {/* Encabezado del Panel */}
       <div
-        className="flex flex-col md:flex-row justify-between items-start md:items-center rounded-xl p-5 mb-8 gap-4"
+        className="flex flex-col md:flex-row justify-between items-start md:items-center rounded-xl p-4 sm:p-5 mb-6 sm:mb-8 gap-4"
         style={{ backgroundColor: C.surfaceLowest, boxShadow: `4px 4px 0 ${C.onSurface}` }}
       >
         <div className="flex items-center gap-3">
           <div
-            className="w-14 h-14 rounded-lg flex items-center justify-center"
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center shrink-0"
             style={{ backgroundColor: C.primary, boxShadow: `3px 3px 0 ${C.onSurface}`, transform: 'rotate(-2deg)' }}
           >
-            <span className="text-white font-extrabold text-lg">DAX</span>
+            <span className="text-white font-extrabold text-base sm:text-lg">DAX</span>
           </div>
           <div>
-            <h2 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-2xl leading-tight uppercase tracking-tight">
+            <h2 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-xl sm:text-2xl leading-tight uppercase tracking-tight">
               Panel de Control
             </h2>
             <p className="text-sm mt-0.5" style={{ color: C.onSurfaceVariant }}>
@@ -49,9 +49,12 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* w-full en mobile para que el botón sea un target táctil cómodo de
+            ancho completo; md:w-auto lo regresa a su tamaño natural en
+            desktop, igual que antes. */}
         <button
           onClick={logout}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold uppercase text-sm transition-transform hover:-rotate-1 active:translate-x-[2px] active:translate-y-[2px]"
+          className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2.5 md:py-2 rounded-lg font-bold uppercase text-sm transition-transform hover:-rotate-1 active:translate-x-[2px] active:translate-y-[2px]"
           style={{
             backgroundColor: C.surfaceHigh,
             color: C.onSurface,
@@ -63,24 +66,25 @@ export default function Dashboard() {
       </div>
 
       {/* Tarjetas de Navegación del CMS */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <Link
           to="/admin/productos"
-          className="group rounded-xl p-8 flex flex-col transition-transform hover:-translate-y-1"
+          className="group rounded-xl p-6 sm:p-8 flex flex-col transition-transform hover:-translate-y-1"
           style={{ backgroundColor: C.surfaceLowest, boxShadow: `5px 5px 0 ${C.onSurface}` }}
         >
           <div
-            className="w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-colors"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center mb-4 sm:mb-6 transition-colors"
             style={{
               backgroundColor: C.primaryContainer,
               color: C.onPrimaryContainer,
               boxShadow: `2px 2px 0 ${C.onSurface}`,
             }}
           >
-            <Package size={32} />
+            <Package size={28} className="sm:hidden" />
+            <Package size={32} className="hidden sm:block" />
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <h3 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-2xl uppercase tracking-tight">
+            <h3 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-xl sm:text-2xl uppercase tracking-tight">
               Catálogo
             </h3>
             <ArrowUpRight
@@ -89,28 +93,29 @@ export default function Dashboard() {
               style={{ color: C.primary }}
             />
           </div>
-          <p className="font-medium" style={{ color: C.onSurfaceVariant }}>
+          <p className="font-medium text-sm sm:text-base" style={{ color: C.onSurfaceVariant }}>
             Sube nuevos stickers, prints, edita precios y gestiona el inventario de tu mercancía.
           </p>
         </Link>
 
         <Link
           to="/admin/portafolio"
-          className="group rounded-xl p-8 flex flex-col transition-transform hover:-translate-y-1"
+          className="group rounded-xl p-6 sm:p-8 flex flex-col transition-transform hover:-translate-y-1"
           style={{ backgroundColor: C.surfaceLowest, boxShadow: `5px 5px 0 ${C.onSurface}` }}
         >
           <div
-            className="w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-colors"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center mb-4 sm:mb-6 transition-colors"
             style={{
               backgroundColor: C.secondaryContainer,
               color: C.onSecondaryContainer,
               boxShadow: `2px 2px 0 ${C.onSurface}`,
             }}
           >
-            <ImageIcon size={32} />
+            <ImageIcon size={28} className="sm:hidden" />
+            <ImageIcon size={32} className="hidden sm:block" />
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <h3 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-2xl uppercase tracking-tight">
+            <h3 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-xl sm:text-2xl uppercase tracking-tight">
               Portafolio
             </h3>
             <ArrowUpRight
@@ -119,28 +124,29 @@ export default function Dashboard() {
               style={{ color: C.secondaryContainer }}
             />
           </div>
-          <p className="font-medium" style={{ color: C.onSurfaceVariant }}>
+          <p className="font-medium text-sm sm:text-base" style={{ color: C.onSurfaceVariant }}>
             Publica tus nuevas piezas de arte, asigna técnicas, categorías y fechas de creación.
           </p>
         </Link>
 
         <Link
           to="/admin/comisiones"
-          className="group rounded-xl p-8 flex flex-col transition-transform hover:-translate-y-1"
+          className="group rounded-xl p-6 sm:p-8 flex flex-col transition-transform hover:-translate-y-1 sm:col-span-2 lg:col-span-1"
           style={{ backgroundColor: C.surfaceLowest, boxShadow: `5px 5px 0 ${C.onSurface}` }}
         >
           <div
-            className="w-16 h-16 rounded-lg flex items-center justify-center mb-6 transition-colors"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center mb-4 sm:mb-6 transition-colors"
             style={{
               backgroundColor: C.tertiaryContainer,
               color: C.onTertiaryContainer,
               boxShadow: `2px 2px 0 ${C.onSurface}`,
             }}
           >
-            <Palette size={32} />
+            <Palette size={28} className="sm:hidden" />
+            <Palette size={32} className="hidden sm:block" />
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <h3 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-2xl uppercase tracking-tight">
+            <h3 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-xl sm:text-2xl uppercase tracking-tight">
               Comisiones
             </h3>
             <ArrowUpRight
@@ -149,7 +155,7 @@ export default function Dashboard() {
               style={{ color: C.tertiaryContainer }}
             />
           </div>
-          <p className="font-medium" style={{ color: C.onSurfaceVariant }}>
+          <p className="font-medium text-sm sm:text-base" style={{ color: C.onSurfaceVariant }}>
             Administra los tipos de comisión que aceptas y sus precios base.
           </p>
         </Link>
