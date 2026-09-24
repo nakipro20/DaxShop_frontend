@@ -43,7 +43,7 @@ export default function Navbar() {
           <img 
             alt="Profile Daxth1" 
             className="w-8 h-8 rounded-full border-2 border-on-surface object-cover" 
-            src="src\assets\image.png"
+            src="https://res.cloudinary.com/bj57ntbk/image/upload/v1790227992/image.png"
           />
         </div>
 
