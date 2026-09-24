@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
-const API_URL = "https://dax-shop-frontend.vercel.app/";
+const API_URL = "https://daxshop-backend.onrender.com";
 
 
 export default function Home() {
