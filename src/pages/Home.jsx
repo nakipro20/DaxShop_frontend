@@ -172,11 +172,11 @@ export default function Home() {
       <div className="w-full bg-secondary-container text-on-secondary-container py-space-xs px-gutter border-b-[3px] border-on-surface flex items-center justify-between overflow-hidden">
         <div className="flex items-center gap-space-md whitespace-nowrap animate-pulse">
           <span className="font-label-sm text-label-sm uppercase flex items-center gap-space-xs">
-            <span className="material-symbols-outlined text-sm">bolt</span> DROPS LIMITADOS 2026
+            <span className="material-symbols-outlined text-sm"></span> DROPS LIMITADOS 2026
           </span>
           <span className="font-label-sm text-label-sm uppercase hidden md:inline">★ ILUSTRACIÓN URBANA & FANART POP</span>
           <span className="font-label-sm text-label-sm uppercase">★ PEDIDOS DIRECTOS VÍA INSTAGRAM @DAXTH1</span>
-          <span className="font-label-sm text-label-sm uppercase hidden lg:inline">★ GUATEMALA & ENVIOS INTERNACIONALES</span>
+          <span className="font-label-sm text-label-sm uppercase hidden lg:inline">★ GUATEMALA</span>
         </div>
       </div>
 
@@ -210,14 +210,14 @@ export default function Home() {
               </h1>
               
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-                Galería y catálogo exclusivo por <strong className="text-on-surface">Jenifer Rodas (Daxth1)</strong>. Ilustraciones de corte cómic, personajes con actitud, stickers resistentes y streetwear impreso bajo demanda.
+                Galería y catálogo exclusivo por <strong className="text-on-surface"> (Daxth1)</strong>. Ilustraciones de corte cómic, personajes con actitud, stickers resistentes y streetwear impreso bajo demanda.
               </p>
               
               {/* Badges de valor tipo sticker */}
               <div className="flex flex-wrap gap-space-xs pt-space-xs">
-                <span className="bg-surface-container-high border-2 border-on-surface rounded-full px-space-sm py-0.5 font-label-sm text-label-sm shadow-[2px_2px_0_#1a1c1a] transform -rotate-1">💥 Zines & Prints</span>
+                <span className="bg-surface-container-high border-2 border-on-surface rounded-full px-space-sm py-0.5 font-label-sm text-label-sm shadow-[2px_2px_0_#1a1c1a] transform -rotate-1">💥 Pines & Prints</span>
                 <span className="bg-surface-container-high border-2 border-on-surface rounded-full px-space-sm py-0.5 font-label-sm text-label-sm shadow-[2px_2px_0_#1a1c1a] transform rotate-2">🎨 Arte Tradicional & Digital</span>
-                <span className="bg-surface-container-high border-2 border-on-surface rounded-full px-space-sm py-0.5 font-label-sm text-label-sm shadow-[2px_2px_0_#1a1c1a] transform -rotate-2">✨ Stickers Troquelados</span>
+                <span className="bg-surface-container-high border-2 border-on-surface rounded-full px-space-sm py-0.5 font-label-sm text-label-sm shadow-[2px_2px_0_#1a1c1a] transform -rotate-2">✨ Stickers </span>
               </div>
 
               {/* CTAs Primarios */}
@@ -241,7 +241,7 @@ export default function Home() {
                   <div className="bg-surface-container-highest border-2 border-on-surface rounded-lg overflow-hidden relative">
                     {/* Reemplaza esta URL con tu imagen principal real si la tienes alojada en otro lado */}
                     <div className="w-full h-80 bg-gray-200 flex items-center justify-center font-headline-md text-gray-500">
-                      <img src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3rAcvXgvPAseie2czbNZk5iAOp8msAFY_IzyBxriHioeUQFsiUXVEUMildhZmCKHA6lRJbouXxtwZgANIJNd8Sif_Gq06mX1jBrbTdxmkILIyFxFlq3xx2ghU37CHjd2Al2vlsGRBHvWyQMosGypea1mpC2-4u6h5x2LeCEeiMtOTKIokI7OOw3VPi5aF0ZxPHLg0PrhD4T_kEI1zvu_FD2OLGf5IX8TIY7AFP5m1UiXoXxcdaSFqYymhnejyxIH_86DVswQow" alt="LOGO DAX" width="100%"/>
+                      <img src="src\assets\image.png" alt="LOGO DAX" width="100%"/>
                     </div>
                     <div className="absolute bottom-2 right-2 bg-primary text-on-primary px-space-sm py-0.5 font-label-sm text-label-sm border-2 border-on-surface rounded shadow-[2px_2px_0_#1a1c1a]">
                       FICHA OFICIAL #01
@@ -744,7 +744,7 @@ export default function Home() {
               <div className="w-12 h-12 rounded-full bg-surface-container-high text-on-surface border-2 border-on-surface shadow-[3px_3px_0_#1a1c1a] flex items-center justify-center font-headline-md text-headline-md">3</div>
               <h3 className="font-headline-sm text-headline-sm text-on-surface uppercase">PAGO Y ENTREGA</h3>
               <p className="font-body-sm text-body-sm text-on-surface-variant">
-                Coordinamos pago seguro (transferencia bancaria local en Guatemala o PayPal para compras internacionales) y acordamos entrega personal o envío por paquetería rastreada.
+                Coordinamos pago seguro (transferencia bancaria local en Guatemala o PayPal para comisiones internacionales) y acordamos entrega personal o envío por paquetería rastreada <b>GUATEMALA</b>.
               </p>
             </div>
           </div>

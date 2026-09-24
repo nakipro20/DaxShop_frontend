@@ -43,7 +43,7 @@ export default function Navbar() {
           <img 
             alt="Profile Daxth1" 
             className="w-8 h-8 rounded-full border-2 border-on-surface object-cover" 
-            src="https://lh3.googleusercontent.com/aida/AEtjO1Ww3rAcvXgvPAseie2czbNZk5iAOp8msAFY_IzyBxriHioeUQFsiUXVEUMildhZmCKHA6lRJbouXxtwZgANIJNd8Sif_Gq06mX1jBrbTdxmkILIyFxFlq3xx2ghU37CHjd2Al2vlsGRBHvWyQMosGypea1mpC2-4u6h5x2LeCEeiMtOTKIokI7OOw3VPi5aF0ZxPHLg0PrhD4T_kEI1zvu_FD2OLGf5IX8TIY7AFP5m1UiXoXxcdaSFqYymhnejyxIH_86DVswQow"
+            src="src\assets\image.png"
           />
         </div>
 

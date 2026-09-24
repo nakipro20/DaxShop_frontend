@@ -34,10 +34,10 @@ const INSTAGRAM_HANDLE = '@daxth1';
 // Contenido de la artista/estudio — ajusta estos textos si cambian.
 const ARTISTA = {
   nombreArtistico: 'DAX',
-  nombreCompleto: 'Jenifer Yasmin Rodas Castañeda',
+  nombreCompleto: 'TH1',
   bio: 'Exploración de narrativa visual, viñetas callejeras, leyendas guatemaltecas y fanarts icónicos. Fusión de técnicas tradicionales al acrílico/óleo con ilustración pop cómic y zines autopublicados.',
   cita: 'El arte callejero y la viñeta cómic son la voz pura de la juventud y el color sin censura.',
-  ubicacion: 'Guatemala · Universidad de San Carlos',
+  // ubicacion: 'Guatemala · Universidad de San Carlos',
 };
 
 export default function Portafolio() {
