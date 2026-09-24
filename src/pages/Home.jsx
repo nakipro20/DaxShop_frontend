@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://dax-shop-frontend.vercel.app/";
 
 
 export default function Home() {
@@ -252,7 +252,7 @@ export default function Home() {
                   <div className="bg-surface-container-highest border-2 border-on-surface rounded-lg overflow-hidden relative">
                     {/* Reemplaza esta URL con tu imagen principal real si la tienes alojada en otro lado */}
                     <div className="w-full h-56 sm:h-72 lg:h-80 bg-gray-200 flex items-center justify-center font-headline-md text-gray-500">
-                      <img src="src\assets\image.png" alt="LOGO DAX" width="100%"/>
+                      <img src="https://drive.google.com/file/d/1LqGvUdHKHvrW7QUoF3VDLgqhfRZdCXwx/view" alt="LOGO DAX" width="100%"/>
                     </div>
                     <div className="absolute bottom-2 right-2 bg-primary text-on-primary px-space-sm py-0.5 font-label-sm text-label-sm border-2 border-on-surface rounded shadow-[2px_2px_0_#1a1c1a]">
                       FICHA OFICIAL #01
