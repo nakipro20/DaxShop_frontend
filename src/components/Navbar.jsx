@@ -14,7 +14,9 @@ export default function Navbar() {
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-space-sm group">
           <div className="p-space-xs bg-secondary-container border-2 border-on-surface rounded-lg shadow-[2px_2px_0_#1a1c1a] transform group-hover:-rotate-3 transition-transform">
-            <span className="font-headline-md text-headline-md text-on-surface tracking-wider uppercase">DAXSHOP</span>
+            <NavLink to="/admin/dashboard" className={navLinkClass}>
+              <span className="font-headline-md text-headline-md text-on-surface tracking-wider uppercase">DAXSHOP</span>
+            </NavLink>
           </div>
         </Link>
 
